@@ -10,25 +10,17 @@ export default function Result() {
     const [feedback, setFeedback] = useState(null);
 
     useEffect(() => {
-        if (!state?.text || !state?.role) {
+        const stored = localStorage.getItem("firstlook-feedback");
+        if (!stored) {
             navigate("/");
             return;
         }
 
-        // Simulate backend call
-        setTimeout(() => {
-            setFeedback({
-                summary: "You show strong experience in backend development but lack specific quantifiable achievements.",
-                scores: {
-                    clarity: 7,
-                    experience: 8,
-                    impact: 5,
-                },
-                hireability: "Likely",
-            });
-            setLoading(false);
-        }, 1000);
-    }, [state, navigate]);
+        const parsed = JSON.parse(stored);
+        setFeedback(parsed);
+        setLoading(false);
+    }, []);
+
 
     // ...
         if (loading) {

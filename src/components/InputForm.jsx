@@ -7,11 +7,26 @@ export default function InputForm() {
     const [role, setRole] = useState("recruiter");
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // In real use: send to backend, then navigate
-        navigate("/result", { state: { text, role } });
+
+        try {
+            const res = await fetch("http://localhost:5000/analyze", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ text, role })
+            });
+
+            const data = await res.json();
+            localStorage.setItem("firstlook-feedback", JSON.stringify(data));
+            navigate("/result");
+        } catch (err) {
+            console.error("Error contacting server:", err);
+            alert("Server error. Try again later.");
+        }
     };
+
+
 
     return (
         <form onSubmit={handleSubmit} className="w-full max-w-xl bg-white p-6 rounded-xl shadow-lg space-y-4">
