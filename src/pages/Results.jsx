@@ -1,5 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import Loader from "../components/Loader";
 import ScoreCard from "../components/ScoreCard";
 
 export default function Result() {
@@ -29,13 +30,15 @@ export default function Result() {
         }, 1000);
     }, [state, navigate]);
 
-    if (loading) {
-        return (
-            <div className="min-h-screen flex items-center justify-center">
-                <p className="text-gray-500 text-xl">Analyzing...</p>
-            </div>
-        );
-    }
+    // ...
+        if (loading) {
+            return (
+                <div className="min-h-screen flex items-center justify-center">
+                    <Loader />
+                </div>
+            );
+        }
+
 
     return (
         <div className="min-h-screen p-6 bg-gray-50 flex flex-col items-center">
