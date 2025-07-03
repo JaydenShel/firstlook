@@ -36,10 +36,10 @@ function parseAIResponse(raw) {
 
 
 router.post('/', async (req, res) => {
-    const { text, role } = req.body;
+    const { text, role, field } = req.body;
 
     const prompt = `
-    You are a highly experienced ${role}. Evaluate the following resume or profile text and return:
+    You are a highly experienced ${role} in the field of ${field}. Evaluate the following resume or profile text and return:
 
     1. A brief summary of strengths/weaknesses
     2. Scores out of 10 for:

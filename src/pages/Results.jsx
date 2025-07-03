@@ -21,42 +21,49 @@ export default function Result() {
         setLoading(false);
     }, []);
 
-
-    // ...
-        if (loading) {
-            return (
-                <div className="min-h-screen flex items-center justify-center">
-                    <Loader />
-                </div>
-            );
-        }
-
+    if (loading) {
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-gray-50">
+                <Loader />
+            </div>
+        );
+    }
 
     return (
-        <div className="min-h-screen p-6 bg-gray-50 flex flex-col items-center">
-            <h2 className="text-3xl font-bold mb-4 text-blue-700">Analysis Result</h2>
-            <p className="max-w-xl text-center text-gray-700 mb-6">{feedback.summary}</p>
+        <div className="min-h-screen p-8 bg-gray-50 flex flex-col items-center">
+            <h2 className="text-4xl font-bold text-blue-800 mb-6">🎯 Analysis Result</h2>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-3xl">
+            {/* Strengths and Weaknesses Summary */}
+            <div className="bg-white rounded-xl shadow-md p-6 mb-6 w-full max-w-3xl">
+                <h3 className="text-xl font-semibold text-gray-800 mb-2">Summary</h3>
+                <p className="text-gray-700 whitespace-pre-wrap">{feedback.summary}</p>
+            </div>
+
+            {/* Score Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full max-w-3xl mb-6">
                 {Object.entries(feedback.scores).map(([category, score]) => (
                     <ScoreCard key={category} title={category} score={score} />
                 ))}
             </div>
 
-            <div className="mt-8 text-xl font-semibold text-green-600">
+            {/* Hireability */}
+            <div className="bg-green-100 text-green-800 text-lg font-bold px-6 py-3 rounded-lg shadow mb-6">
                 Overall Hireability: {feedback.hireability}
             </div>
 
+            {/* Run Again Button */}
             <button
                 onClick={() => navigate("/")}
-                className="mt-6 px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+                className="px-6 py-2 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition"
             >
-                Run Another
+                🔁 Run Another
             </button>
-            <p className="max-w-xl text-center text-gray-700 mb-6 whitespace-pre-wrap">
-                {feedback.raw}
-            </p>
 
+            {/* Raw Output */}
+            <div className="mt-8 w-full max-w-3xl bg-white rounded-lg p-4 shadow-sm text-sm text-gray-600 whitespace-pre-wrap">
+                <span className="block font-semibold text-gray-800 mb-2">Raw Output:</span>
+                {feedback.raw}
+            </div>
         </div>
     );
 }
