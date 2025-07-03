@@ -53,6 +53,10 @@ export default function Result() {
             >
                 Run Another
             </button>
+            <p className="max-w-xl text-center text-gray-700 mb-6 whitespace-pre-wrap">
+                {feedback.raw}
+            </p>
+
         </div>
     );
 }
