@@ -16,12 +16,11 @@ app.use('/analyze', analyzeRoute);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const staticPath = path.join(__dirname, '../client/dist');
-console.log('Serving static from:', staticPath);
-app.use(express.static(staticPath));
+const distPath = path.join(__dirname, '..', 'dist');
+app.use(express.static(distPath));
 
 app.get(/(.*)/, (req, res) => {
-    res.sendFile(path.join(staticPath, 'index.html'));
+    res.sendFile(path.join(distPath, 'index.html'));
 });
 
 const PORT = process.env.PORT || 5000;
