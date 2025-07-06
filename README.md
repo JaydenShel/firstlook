@@ -2,6 +2,8 @@
 
 FirstLook is a simple app I built to help people get quick feedback on their resumes or personal bios. You paste in your text, pick a role (like "software engineer" or "product manager"), and it gives you a short breakdown with scores and whether you're hireable.
 
+https://firstlook-5728ff6efa49.herokuapp.com/
+
 It uses OpenAI under the hood to do the analysis and returns structured feedback like:
 - A summary of strengths/weaknesses  
 - Scores out of 10 for clarity, experience, and impact  
