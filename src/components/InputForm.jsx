@@ -1,5 +1,6 @@
 import Select from "react-select";
 import { useState } from "react";
+import { API_BASE_URL } from "../config.jsx"
 
 const jobFields = [
     "Software Engineering", "Product Management", "Data Science", "UX/UI Design",
@@ -21,7 +22,7 @@ export default function InputForm() {
         e.preventDefault();
         if (!text || !role || !field) return;
 
-        const res = await fetch("http://localhost:5000/analyze", {
+        const res = await fetch(`${API_BASE_URL}/analyze`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ text, role, field: field.value }),
