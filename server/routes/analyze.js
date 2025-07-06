@@ -1,6 +1,6 @@
-import express from 'express';
-import { OpenAI } from 'openai';
-import dotenv from 'dotenv';
+const express = require('express');
+const { OpenAI } = require('openai');
+const dotenv = require('dotenv');
 
 dotenv.config();
 
@@ -34,7 +34,6 @@ function parseAIResponse(raw) {
     };
 }
 
-
 router.post('/', async (req, res) => {
     const { text, role, field } = req.body;
 
@@ -53,7 +52,6 @@ router.post('/', async (req, res) => {
     `;
 
     try {
-
         const chatResponse = await openai.chat.completions.create({
             model: "gpt-3.5-turbo",
             messages: [{ role: "user", content: prompt }],
@@ -70,4 +68,4 @@ router.post('/', async (req, res) => {
     }
 });
 
-export default router;
+module.exports = router;
